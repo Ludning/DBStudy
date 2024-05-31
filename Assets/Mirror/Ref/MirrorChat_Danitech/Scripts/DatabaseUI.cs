@@ -28,9 +28,9 @@ public class DatabaseUI : MonoBehaviour
    }
 
 
-   private void SendQuary(string queryStr, string tableName)
+   private void SendQuery(string queryStr, string tableName)
    {
-       //있으면 SELECT쿼리 호출
+       //SELECT쿼리 호출
        if (queryStr.Contains("SELECT"))
        {
            DataSet dataSet = OnSelectRequest(queryStr, tableName);
@@ -50,8 +50,6 @@ public class DatabaseUI : MonoBehaviour
            MySqlCommand sqlCmd = new MySqlCommand();
            sqlCmd.Connection = _dbConnection;
            sqlCmd.CommandText = query;
-
-           sqlCmd.Parameters.AddWithValue("@value1", "some_value");
 
            _dbConnection.Open();
            sqlCmd.ExecuteNonQuery();
@@ -139,8 +137,8 @@ public class DatabaseUI : MonoBehaviour
 
         Text_Log.text = string.Empty;
         
-        string query = string.IsNullOrWhiteSpace(Input_Query.text) ? "SELECT U_Name, U_Password FROM user_info" : Input_Query.text;
-        SendQuary(query, "user_info");
+        string query = string.IsNullOrWhiteSpace(Input_Query.text) ? "SELECT U_Id, U_Name, U_Password FROM user_info" : Input_Query.text;
+        SendQuery(query, "user_info");
     }
     public void OnClick_OpenDatabaseUI()
     {
